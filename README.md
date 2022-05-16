@@ -1,4 +1,16 @@
-# Getting Started with Create React App
+# CodeNation-MasterCourse-TodoList
+
+A ToDo List web app build with React for the master course week 5
+
+The project is live at [ ]( )
+
+Here's some of the stuff I got working in this project:
+
+* Using components, hooks, modules, event listener and event dispatcher
+
+---
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
