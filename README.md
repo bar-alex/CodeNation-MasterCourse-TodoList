@@ -2,7 +2,7 @@
 
 A ToDo List web app build with React for the master course week 5
 
-The project is live at [ ]( )
+The project is live at [https://darling-churros-3ac54f.netlify.app]( https://darling-churros-3ac54f.netlify.app )
 
 Here's some of the stuff I got working in this project:
 
