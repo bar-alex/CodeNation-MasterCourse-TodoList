@@ -1,4 +1,6 @@
 import { useState } from "react";
+import styled from 'styled-components'
+
 import InputText from "./InputText";
 import AddCircle from "@mui/icons-material/AddCircleOutline";
 
@@ -10,33 +12,57 @@ const ListFooter = (props) => {
     let [ editing, setEditing ] = useState( false );
 
     return (
-      <div id='list-footer'>
+      <DivFooter>
           
           { 
           ( editing 
             && <InputText 
-                  dataList={props.dataList} 
-                  dataHook={props.dataHook} 
+                  todoList={props.todoList} 
+                  todoHook={props.todoHook} 
                   editingSetter={setEditing} 
                   />
           ) || <AddCircle 
-                  id='button-add' 
-                  className='button-color' 
                   onClick={ () => setEditing(true) } 
                   />
           }
 
-            <p>This is the footer</p>
-      </div>
+            {/* <p>This is the footer</p> */}
+      </DivFooter>
     );
   }
 
   
-  export default ListFooter
+export default ListFooter
 
 
-//   <button id='button-add' onClick={ () => setEditing(true) }>
-//   {/* <span className="material-symbols-outlined"> add_circle </span> */}
-//   <AddCircle />
-//   {/* <BiPlusCircle /> */}
-// </button>
+const DivFooter = styled.div`
+  width: 100%;
+  height: 6vh;
+  position: relative;
+  flex-grow: 0;
+  border-radius: 0px 0px 5px 5px;
+  /* padding: 0px 10px; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  > svg {
+    position: absolute;
+    margin: auto;
+    margin-top: -6vh;
+    width: 60px;
+    height: 60px;
+    /* font-size-adjust: 15; */
+    /* font-size: 5rem; */
+  
+    color: var(--color-button);
+
+    &:hover{
+      transition: color .5s ease;
+      color: var(--color-button-action);
+    }
+  }
+
+`

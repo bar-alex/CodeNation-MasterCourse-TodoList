@@ -33,7 +33,6 @@ body{
   background: fixed no-repeat url("./assets/background.jpg");
   background-size: cover;
   background-attachment: fixed;
-
 }
 
 
@@ -80,7 +79,7 @@ body{
 
 /* the container of the list */
 #main{
-  margin-top: 2%;
+  margin-top: 4%;
   
   max-width: 30vw;
   min-width: 360px;
@@ -98,134 +97,6 @@ body{
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-}
-
-/* the header part of the list (above the items) */
-#list-header{
-  width: 100%;
-  height: 8vh;
-  flex-grow: 0;
-  border-radius: 5px 5px 0px 0px;
-
-  /* border: 1px solid blue; */
-}
-
-
-/* hold the list elements */
-#list-body{
-  width: 100%;
-  flex-grow: 1;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-
-  /* border: 1px solid orange; */
-}
-
-/* this is the styling of the item itself */
-.list-item{
-  min-height: 3vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  position: relative;
-  
-  border: 1px dotted rgba(128, 128, 128, 0.5);;
-}
-.list-item > p{
-  margin: 0px, 5px;
-  padding: 0px 3px;
-  /* user-select: none; */
-}
-.text-crossed{
-  text-decoration: line-through;
-  color: grey;
-  /* user-select: none; */
-}
-.tick-area{
-  display: inline-block;
-  height: 3.5vh;
-  width: 3vw;
-  text-align: center;
-  color: grey;
-  /* border: 1px solid purple; */
-}
-.unticked{
-  color: rgba(128, 128, 128, 0.5);
-}
-.ticked{
-  color: green;
-}
-
-
-/* the footer part of the list (below the list) */
-#list-footer{
-  width: 100%;
-  height: 8vh;
-  position: relative;
-  flex-grow: 0;
-  border-radius: 0px 0px 5px 5px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-
-  /* border: 1px solid green; */
-}
-
-#button-add{
-  position: absolute;
-  margin: auto;
-  margin-top: -3vh;
-  width: 50px;
-  height: 50px;
-  /* color: var(--color-button); */
-}
-
-
-#input-form{
-  align-self: stretch;
-  width: 100%;
-  display: flex;
-  justify-content: stretch;
-  flex-grow: 0;
-  margin: 2px 1px;
-  position: relative;
-
-  /* border: 1px solid purple; */
-}
-
-#input-text{
-  align-self: stretch;
-  flex-grow: 2;
-  padding-left: 3px;
-  font-family: Ubuntu, Cantarell, helvetica neue, sans-serif;
-  font-size: 1rem;
-  /* position: absolute; */
-  z-index: -1;
-}
-#input-text::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: gray;
-  opacity: .7; /* Firefox */
-}
-#input-cancel{
-  align-self: flex-end;
-  flex-grow: 0;
-  /* flex-shrink: 1; */
-  /* margin-right: -1; */
-  /* right: -1; */
-}
-
-
-.button-color{
-  color: var(--color-button);
-}
-.button-color:hover{
-  transition: color .5s ease;
-  color: var(--color-button-action);
 }
 
 

@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import InputText from './InputText';
@@ -17,55 +18,55 @@ const ListItem = (props) => {
 
     return (
       // <li className='list-item' onDoubleClick={ (e) => handleDblClick(e) }>
-      <li className='list-item' onDoubleClick={ () => props.toggleFunc(props.index) }>
+      <ItemDiv 
+        marked={ props.itemData.marked }
+        onDoubleClick={ () => props.toggleFunc(props.index) }
+        >
 
-        { 
-        ( !editing
-          && <p className={ props.itemData.marked ? 'text-crossed' : '' }>{props.itemData.text}</p>
-        ) || <InputText 
-                dataList={props.dataList} 
-                dataHook={props.dataHook} 
-                editingSetter={setEditing} 
-                />
-        }
+        <p>{props.itemData.text}</p>
 
-        { 
-         !editing 
-          &&  ( ( props.itemData.marked 
-                  && <CheckCircleOutlineIcon className="tick-area ticked" onClick={ () => props.toggleFunc(props.index) } />
-                ) || <CircleOutlinedIcon className="tick-area unticked button-color" onClick={ () => props.toggleFunc(props.index) } /> 
-              )
-        }
-       
-      </li>
+          {
+            ( props.itemData.marked
+              && <CheckCircleOutlineIcon onClick={ () => props.toggleFunc(props.index) }/>
+            ) || <CircleOutlinedIcon onClick={ () => props.toggleFunc(props.index) }/>
+          }
+
+      </ItemDiv>
     )
   }
 
 export default ListItem
 
 
+const ItemDiv = styled.div`
+  /* border: 1px solid red; */
+  min-height: 3vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* align-items: stretch; */
+  position: relative;
+  flex-grow: 1;
+  /* border: 1px dotted rgba(128, 128, 128, 0.5); */
 
-// // the item component of the list
-// const ListItem = (props) => {
-//   return (
-//     <li className='list-item' >
-//       <label name='mark'>{props.itemData.text}</label>
+  p{
+    /* border: 1px solid purple; */
+    margin: 0px, 5px;
+    padding: 0px 3px;
 
-//       { props.itemData.marked && 
-//         <input type='checkbox' 
-//           value={props.itemData.marked} 
-//           onClick={ () => props.toggleFunc(props.index) } 
-//           checked />
-//       }
+    /* text-decoration: line-through */
+    ${ (props) => props.marked && `
+      text-indent: 5px;
+      font-style: italic;
+      color: grey;` 
+    }
+  }
+  
 
-//       { !props.itemData.marked && 
-//         <input type='checkbox' 
-//           value={props.itemData.marked} 
-//           onClick={ () => props.toggleFunc(props.index) } 
-//            />
-//       }
-
-
-//     </li>
-//   )
-// }
+  svg{
+    /* border: 1px solid purple; */
+    font-size: 1.6rem;
+    align-self: center;
+    color: ${ (props) => (props.marked ? `green;` : `rgba(128, 128, 128, 0.5);`) }
+  }  
+`

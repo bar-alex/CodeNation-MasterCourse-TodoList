@@ -18,7 +18,9 @@
 
 
 // import logo from './logo.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+
 import './App.css';
 import ListFooter from './ListFooter';
 import ListHeader from './ListHeader';
@@ -42,22 +44,45 @@ const initialDemoList = [
 
 const App = () => {
    // itemList holds the items, each item an object with {text,marked}
-  let [todoList, setTodoList] = useState( () => {
-    // getting stored value
-    const saved = localStorage.getItem("todoList");
-    const initialValue = JSON.parse(saved);
-    return initialValue || initialDemoList;
-  } );
+  let [todoList, setTodoList] = useState( [] );
+  // shows the marked items or not
+  let [showMarked, setShowMarked] = useState( true );
 
-  // changes the check status of the 
+  // changes the check status of the item in the list
   const toggleCheckMark = (index) => {
     let newTodoList = todoList.map( (it, idx) => idx === index ? {...it,marked: !it.marked} : {...it} );
     setTodoList( newTodoList );
-    console.log( 'toggleCheckMark', index, newTodoList[index] );
+    // console.log( 'toggleCheckMark', index, newTodoList[index] );
     // save to localStorage
     localStorage.setItem('todoList', JSON.stringify(newTodoList));
   }
-  
+
+
+  // load todo list from localstorage on mount
+  useEffect(() => {
+      // getting stored list
+      const savedList = localStorage.getItem("todoList");
+      const initialListValue = JSON.parse(savedList) || initialDemoList ;
+      setTodoList(initialListValue);
+      // console.log('loadFromLocalsStorage',initialListValue,initialDemoList);
+
+      // getting stored filter
+      const savedShowMarked = localStorage.getItem('showMarkedFilter')
+      console.log('savedShowMarked-1',typeof savedShowMarked,savedShowMarked);
+      setShowMarked( savedShowMarked!=='false' )
+      console.log('savedShowMarked-2', savedShowMarked!=='false');
+  },[])
+
+
+  // useEffect(() => {
+  //   localStorage.setItem('showMarkedFilter', showMarked);
+  // },[showMarked] )
+
+
+  // used below for conditional rendering
+  const itemsUnmarked = () => todoList.filter( x => !x.marked ).length;
+  const itemsMarked = () => todoList.filter( x => x.marked ).length;
+
 
   return (
     <div className="App">
@@ -66,35 +91,71 @@ const App = () => {
       </header>
 
       <main id='main' className='glass-8'>
-
+        { console.log( 'main',showMarked ) }
         <ListHeader  
-          itemsCount={todoList.length} 
-          />
+          showMarked={ showMarked }
+          setShowMarked={setShowMarked} 
+          todoList = { todoList }
+          todoHook = { setTodoList } />
 
-        <ul id='list-body'>
-            { 
-            todoList.map( (it,idx) => 
-              <ListItem key={idx} 
-                index = { idx } 
-                itemData = { it } 
-                toggleFunc = { toggleCheckMark } 
-                dataList = { todoList }
-                dataHook = { setTodoList }
-                /> ) 
-            }
-        </ul>
+        { (itemsUnmarked()>0 || itemsMarked()>0 && showMarked)
+          && <ListBody>
+              { 
+              todoList.map( (it,idx) => 
+                // either show all or only unmarked ones
+                (showMarked || !it.marked)
+                && <li className='list-item' key={idx} tabIndex="0">
+                    <ListItem
+                        index = { idx } 
+                        itemData = { it } 
+                        toggleFunc = { toggleCheckMark } 
+                        /> 
+                    </li>
+              ) 
+              }
+          </ListBody>
+        }
+
+        { (itemsUnmarked()===0 && !showMarked && itemsMarked()>0)
+          && <div>There are no items to display<br/>(but you have {itemsMarked()} marked ones)</div>
+        }
+
+        { (itemsUnmarked()===0 && itemsMarked()===0)
+          && <div>There are no items to display<br/>Good job!</div>
+        }
 
         <ListFooter 
-          dataList = { todoList }
-          dataHook = {  setTodoList }
-          />
+          todoList = { todoList }
+          todoHook = { setTodoList } />
 
       </main>
-
     </div>
   );
 }
 
-
-
 export default App;
+
+
+const ListBody = styled.ul`
+  /* border: 1px solid orange; */
+  width: 100%;
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  li{
+    /* min-height: 3vh; */
+    height: 4.5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    position: relative;
+    padding: 0px 10px;
+    /* border: 1px dotted rgba(128, 128, 128, 0.5);; */ */
+
+    /* :focus-visible */
+  }
+`
