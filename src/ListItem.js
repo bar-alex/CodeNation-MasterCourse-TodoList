@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
-import InputText from './InputText';
-import { useState } from 'react';
 
 
 // the item component of the list
 const ListItem = (props) => {
-
-  let [editing, setEditing] = useState(false);
 
     // handle dbl-click -- edit, use evt,target
     // const handleDblClick = (evt) => {

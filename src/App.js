@@ -98,7 +98,7 @@ const App = () => {
           todoList = { todoList }
           todoHook = { setTodoList } />
 
-        { (itemsUnmarked()>0 || itemsMarked()>0 && showMarked)
+        { (itemsUnmarked()>0 || (itemsMarked()>0 && showMarked))
           && <ListBody>
               { 
               todoList.map( (it,idx) => 
