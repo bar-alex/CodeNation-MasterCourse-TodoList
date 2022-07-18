@@ -7,7 +7,7 @@ The project is live at [https://darling-churros-3ac54f.netlify.app]( https://dar
 Here's some of the stuff I got working in this project:
 
 - Using components, hooks, modules, event listeners and event dispatcher
-- Used a 'glass-morphism' style for the UI
+- Used a 'glass-morphism' / 'frosted glass' style for the UI
 - The 'add' button and the input text are conditionally rendered, and bound to keyboard's ESC key, additionally the button is positioned with an offset from its base component position.
 - Can filter to see the 'unmarked' items only, or the 'marked' items as well.
 - Can clear (delete) all the marked items.
